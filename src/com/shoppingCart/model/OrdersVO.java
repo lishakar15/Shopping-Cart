@@ -1,5 +1,7 @@
 package com.shoppingCart.model;
 
+import java.util.Date;
+
 public class OrdersVO {
 	private int orderId;
 	private int productId;
@@ -7,7 +9,21 @@ public class OrdersVO {
 	private String productName;
 	private int quantity;
 	private String totalAmount;
+	private String orderDate;
+	private String productCategory;
 	
+	public String getProductCategory() {
+		return productCategory;
+	}
+	public void setProductCategory(String productCategory) {
+		this.productCategory = productCategory;
+	}
+	public String getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
 	public OrdersVO()
 	{
 		

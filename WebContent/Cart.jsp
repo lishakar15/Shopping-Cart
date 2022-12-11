@@ -71,7 +71,7 @@ font-size: 25px;
 <tr>
 <td><%=cartVO.getProductName() %></td>
 <td> <%=cartVO.getCategory() %></td>
-<td><%=cartVO.getPrice()*cartVO.getQuantity() %></td>
+<td><%=dcf.format(cartVO.getPrice()*cartVO.getQuantity())%></td>
 <td>
 <a href="cart-inc-dec?action=decrement&id=<%=cartVO.getProductId() %>"class="btn btn-sm btn-incre"><i class="fas fa-minus-square"  style="color:red"></i></a>
 <input type ="text" name="quantity" style="width:50px;text-align:center;" value ="<%=cartVO.getQuantity()%>" disabled>
