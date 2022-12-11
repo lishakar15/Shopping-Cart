@@ -13,7 +13,7 @@ public class LogoutServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
 	{
 		System.out.println("User logged out");
-		request.getSession().removeAttribute("userName");
+		request.getSession().removeAttribute("user");
 		response.sendRedirect("index.jsp");
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException

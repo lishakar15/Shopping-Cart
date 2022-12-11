@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.shoppingCart.dao.ProductDao"%>
 <%@page import="com.shoppingCart.model.ProductVO"%>
 <%@page import="com.shoppinCart.DBConnection.DbConnection"%>
@@ -13,8 +14,11 @@
 {
 	ProductDao productDao = new ProductDao(DbConnection.getConnection());
 	cartList = productDao.getProductDetailsById(cartVOList);
+	request.getSession().setAttribute("cartList", cartList);
 }
- Double totalAmt = 0.0;
+ DecimalFormat dcf = new DecimalFormat("#.##");
+ request.setAttribute("dcf", dcf);
+ Double totalAmt = 0.00;
  
  if(null!=cartList && !cartList.isEmpty())
 	{
@@ -22,7 +26,7 @@
 		while(itr.hasNext())
 		{
 			CartVO cartVO = (CartVO)itr.next();
-			double itemAmt = Double.parseDouble(cartVO.getPrice().replace("$", ""))*cartVO.getQuantity();
+			double itemAmt = cartVO.getPrice()*cartVO.getQuantity();
 			totalAmt = totalAmt+itemAmt;
 		}
 	}
@@ -45,7 +49,7 @@ font-size: 25px;
 <body>
 <div class = "container">
 <div class="d-flex py-3">
-<h3>Total Price: $<%=totalAmt %></h3>
+<h3>Total Price: $<%=dcf.format(totalAmt) %></h3>
 <a href="#" class="mx-3 btn btn-success">Check Out</a>
 </div>
 <table class="table table-loght">
@@ -54,7 +58,8 @@ font-size: 25px;
 <th scope="col">Category</th>
 <th scope="col">Price</th>
 <th scope="col">Quantity</th>
-<th scope="col">Cancel</th>
+<th scope="col"></th>
+<th scope="col"></th>
 </tr>
 <% if(null!=cartList && !cartList.isEmpty())
 	{
@@ -66,17 +71,18 @@ font-size: 25px;
 <tr>
 <td><%=cartVO.getProductName() %></td>
 <td> <%=cartVO.getCategory() %></td>
-<td><%=cartVO.getPrice() %></td>
+<td><%=cartVO.getPrice()*cartVO.getQuantity() %></td>
 <td>
-<form action="#" class="form-inline">
-<input type="hidden" value="1"/>
-<a href="#" class="btn btn-sm btn-incre"><i class="fas fa-minus-square"  style="color:red"></i></a>
-<input type ="text" name="quantity" value ="1" disabled>
-<a href="#" class="btn btn-sm btn-incre"><i class="fas fa-plus-square" style="color:green"></i></a>
-</form>
+<a href="cart-inc-dec?action=decrement&id=<%=cartVO.getProductId() %>"class="btn btn-sm btn-incre"><i class="fas fa-minus-square"  style="color:red"></i></a>
+<input type ="text" name="quantity" style="width:50px;text-align:center;" value ="<%=cartVO.getQuantity()%>" disabled>
+<a href="cart-inc-dec?action=increment&id=<%=cartVO.getProductId() %>" class="btn btn-sm btn-incre"><i class="fas fa-plus-square" style="color:green"></i></a>
+
 </td>
 <td>
-<a href="#" class="btn btn-sm btn-danger">Cancel</a>
+<a href="cancel-item?id=<%=cartVO.getProductId() %>" class="btn btn-sm btn-danger">Cancel</a>
+</td>
+<td>
+<a href="order-item?id=<%=cartVO.getProductId() %>" class="btn btn-sm btn-success">Buy Now</a>
 </td>
 </tr>
 

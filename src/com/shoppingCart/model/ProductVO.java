@@ -4,7 +4,7 @@ public class ProductVO {
 	
 	private int productId;
 	private String productName;
-	private String price;
+	private double price;
 	private String category;
 	private String imageName;
 	public int getProductId() {
@@ -19,10 +19,10 @@ public class ProductVO {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	public String getPrice() {
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	public String getCategory() {
@@ -42,7 +42,7 @@ public class ProductVO {
 		return "ProductDao [productId=" + productId + ", productName=" + productName + ", price=" + price
 				+ ", category=" + category + ", imageName=" + imageName + "]";
 	}
-	public ProductVO(int productId, String productName, String price, String category, String imageName) {
+	public ProductVO(int productId, String productName, double price, String category, String imageName) {
 		super();
 		this.productId = productId;
 		this.productName = productName;

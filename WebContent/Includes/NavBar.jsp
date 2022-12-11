@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,12 +21,19 @@
         <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="Cart.jsp">My Cart <span class="badge badge-danger">${cartList.size()}</span></a>
+      <c:choose>
+      <c:when test = "${cartList!=null && cartList.size()>0}">
+      	<a class="nav-link" href="Cart.jsp">My Cart <span class="badge badge-danger">${cartList.size()}</span></a>
+      </c:when>
+      <c:otherwise>
+        <a class="nav-link" href="Cart.jsp">My Cart </a>
+      </c:otherwise>
+      </c:choose>
       </li>
       <li class="nav-item">
         <a class="nav-link " href="Orders.jsp">Orders</a>
       </li>
-      <%if(null == request.getSession().getAttribute("userName")) {%>
+      <%if(null == request.getSession().getAttribute("user")) {%>
       <li class="nav-item">
         <a class="nav-link " href="Login.jsp">Login</a>
       </li>
