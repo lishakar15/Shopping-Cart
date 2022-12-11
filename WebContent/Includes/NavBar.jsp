@@ -20,7 +20,7 @@
         <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="Cart.jsp">My Cart</a>
+        <a class="nav-link" href="Cart.jsp">My Cart <span class="badge badge-danger">${cartList.size()}</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link " href="Orders.jsp">Orders</a>

@@ -6,9 +6,14 @@
 <%@page import="com.shoppingCart.dao.ProductDao" %>
 <%@page  import="java.util.List"%>
 <%@page  import="java.util.Iterator"%>
+<%@page import="com.shoppingCart.model.CartVO" %>
 <% 	
+//Populate products to display
 ProductDao productDao = new ProductDao(DbConnection.getConnection());
 List<ProductVO> productList=productDao.getProductDetails();
+
+//Adding cart list from session to request to display the item count in cart link in nav
+List<CartVO>cartList= (List<CartVO>)request.getSession().getAttribute("cartList");
 
 %>
 <!DOCTYPE html>
