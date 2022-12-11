@@ -5,8 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
+import com.shoppingCart.model.CartVO;
 import com.shoppingCart.model.ProductVO;
 
 public class ProductDao {
@@ -40,5 +41,40 @@ public class ProductDao {
 			e.printStackTrace();			
 		}
 		return productList;
+	}
+	public List<CartVO> getProductDetailsById(List<CartVO> cartList)
+	{
+		List<CartVO> cartProductList = null;
+		CartVO cartVONew = null;
+		if(null != cartList && cartList.size()>0)
+		{
+			cartProductList = new ArrayList<>();
+			Iterator<CartVO> itr = cartList.iterator();
+			while(itr.hasNext())
+			{
+				CartVO cartVO =  itr.next();
+				String query ="select * from product where productid =?";
+				try {
+					pstmt = this.connection.prepareStatement(query);
+					pstmt.setInt(1,cartVO.getProductId());
+					resultSet = pstmt.executeQuery();
+					while(resultSet.next())
+					{
+						cartVONew = new CartVO();
+						cartVONew.setCategory(resultSet.getString("category"));
+						cartVONew.setPrice(resultSet.getString("Price"));
+						cartVONew.setProductId(resultSet.getInt("productid"));
+						cartVONew.setProductName(resultSet.getString("productname"));
+						cartVONew.setQuantity(cartVO.getQuantity());
+						cartProductList.add(cartVONew);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+				
+		}
+		return cartProductList;
+		
 	}
 }
