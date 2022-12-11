@@ -8,12 +8,13 @@
 <%@page  import="java.util.Iterator"%>
 <%@page import="com.shoppingCart.model.CartVO" %>
 <% 	
+List<CartVO>cartList = null;
 //Populate products to display
 ProductDao productDao = new ProductDao(DbConnection.getConnection());
 List<ProductVO> productList=productDao.getProductDetails();
 
 //Adding cart list from session to request to display the item count in cart link in nav
-List<CartVO>cartList= (List<CartVO>)request.getSession().getAttribute("cartList");
+cartList= (List<CartVO>)request.getSession().getAttribute("cartList");
 
 %>
 <!DOCTYPE html>
@@ -40,11 +41,11 @@ List<CartVO>cartList= (List<CartVO>)request.getSession().getAttribute("cartList"
 			
 			<div class="card-body">
 				<h5 class="card-title"><%= productVO.getProductName() %></h5>
-				<h6 class="price">Price: <%= productVO.getPrice() %></h6>
+				<h6 class="price">Price: $<%= productVO.getPrice() %></h6>
 				<h6 class="category">Category: <%= productVO.getCategory() %></h6>
 				<div class="mt-3 d-flex justify-content-between">
 				<a href="add-to-cart?id=<%=productVO.getProductId()%>" class="btn btn-primary">Add to cart</a>
-				<a href="#" class="btn btn-primary">Buy Now</a>
+				<a href="order-item?id=<%=productVO.getProductId() %>" class="btn btn-primary">Buy Now</a>
 				</div>
 			</div>
 		</div>

@@ -33,7 +33,7 @@ public class ProductDao {
 				productVO.setProductId(resultSet.getInt("productid"));
 				productVO.setProductName(resultSet.getString("productname"));
 				productVO.setCategory(resultSet.getString("category"));
-				productVO.setPrice(resultSet.getString("price"));
+				productVO.setPrice(resultSet.getDouble("price"));
 				productVO.setImageName(resultSet.getString("imagename"));
 				productList.add(productVO);
 			}
@@ -62,7 +62,7 @@ public class ProductDao {
 					{
 						cartVONew = new CartVO();
 						cartVONew.setCategory(resultSet.getString("category"));
-						cartVONew.setPrice(resultSet.getString("Price"));
+						cartVONew.setPrice(resultSet.getDouble("Price"));
 						cartVONew.setProductId(resultSet.getInt("productid"));
 						cartVONew.setProductName(resultSet.getString("productname"));
 						cartVONew.setQuantity(cartVO.getQuantity());

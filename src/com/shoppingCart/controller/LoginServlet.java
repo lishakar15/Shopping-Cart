@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet{
 				if(null != userVO)
 				{
 				System.out.println("Login SuccessFull");
-				request.getSession().setAttribute("userName",userVO.getUserName() );
+				request.getSession().setAttribute("user",userVO );
 				response.sendRedirect("index.jsp");
 				}
 				else
