@@ -43,7 +43,9 @@
 .btn-incre,.btn-decre{
 font-size: 25px;
 }
-
+.containerA{
+width:60%;
+}
 </style>
 </head>
 <body>
@@ -52,15 +54,7 @@ font-size: 25px;
 <h3>Total Price: $<%=dcf.format(totalAmt) %></h3>
 <a href="#" class="mx-3 btn btn-success">Check Out</a>
 </div>
-<table class="table table-loght">
-<tr>
-<th scope="col">Name</th>
-<th scope="col">Category</th>
-<th scope="col">Price</th>
-<th scope="col">Quantity</th>
-<th scope="col"></th>
-<th scope="col"></th>
-</tr>
+<hr/>
 <% if(null!=cartList && !cartList.isEmpty())
 	{
 		Iterator itr = cartList.iterator();
@@ -68,31 +62,49 @@ font-size: 25px;
 		{
 			CartVO cartVO = (CartVO)itr.next();
 			%>
-<tr>
-<td><%=cartVO.getProductName() %></td>
-<td> <%=cartVO.getCategory() %></td>
-<td><%=dcf.format(cartVO.getPrice()*cartVO.getQuantity())%></td>
-<td>
-<a href="cart-inc-dec?action=decrement&id=<%=cartVO.getProductId() %>"class="btn btn-sm btn-incre"><i class="fas fa-minus-square"  style="color:red"></i></a>
-<input type ="text" name="quantity" style="width:50px;text-align:center;" value ="<%=cartVO.getQuantity()%>" disabled>
-<a href="cart-inc-dec?action=increment&id=<%=cartVO.getProductId() %>" class="btn btn-sm btn-incre"><i class="fas fa-plus-square" style="color:green"></i></a>
-
-</td>
-<td>
-<a href="cancel-item?id=<%=cartVO.getProductId() %>" class="btn btn-sm btn-danger">Cancel</a>
-</td>
-<td>
-<a href="order-item?id=<%=cartVO.getProductId() %>" class="btn btn-sm btn-success">Buy Now</a>
-</td>
-</tr>
-
+      <div class="d-flex flex-wrap ">
+      <div class="containerA d-inline-flex">
+        <div class="mx-2 ">
+            <img class="card-img-top" style="width: 15rem" src="product-image/<%= cartVO.getImageName() %>" alt="Card image cap">
+          </div>
+          <!--Info panel-->
+        <div class="info panel mx-4">
+          <div class="">
+            <h3><%=cartVO.getProductName() %></h3>
+            <div class="">
+              <h5>Category :  <%=cartVO.getCategory() %></h5>
+            </div>
+            <div class="">
+              <h5>Item Available </h5>
+            </div>
+          </div>
+          <!--Increment and Decrement Button-->
+          <div>
+            <a href="cart-inc-dec?action=decrement&id=<%=cartVO.getProductId() %>" class="btn btn-sm btn-incre">
+              <i class="fas fa-minus-square" style="color:red"></i>
+            </a>
+            <input type="text" name="quantity" style="width:50px;text-align:center;" value="<%=cartVO.getQuantity()%>" disabled>
+            <a href="cart-inc-dec?action=increment&id=<%=cartVO.getProductId() %>" class="btn btn-sm btn-incre">
+              <i class="fas fa-plus-square" style="color:green"></i>
+            </a>
+          </div>
+        </div>
+        </div>
+        <!--Rate panel-->
+        <div class ="d-flex my-3" >
+        <div class=" d-flex align-items-center mx-4">
+          <h5>Price : $<%=dcf.format(cartVO.getPrice()*cartVO.getQuantity())%></h5>
+        </div>
+        <!--Buttons-->
+        <div class="d-flex align-items-center mx-4">
+          <a href="cancel-item?id=<%=cartVO.getProductId() %>" class="btn btn-sm btn-danger mr-3">Cancel </a>
+          <a href="order-item?id=<%=cartVO.getProductId() %>" class="btn btn-sm btn-success">Buy Now </a>
+        </div>
+        </div>
+    </div>
+    <hr/>
 	<%}
 }%>
-
-</table>
-
-</div>
-
 </body>
 <%@ include file="/Includes/Footer.jsp"%>
 </html>

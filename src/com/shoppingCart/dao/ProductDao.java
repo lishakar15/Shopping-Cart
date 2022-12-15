@@ -66,6 +66,7 @@ public class ProductDao {
 						cartVONew.setProductId(resultSet.getInt("productid"));
 						cartVONew.setProductName(resultSet.getString("productname"));
 						cartVONew.setQuantity(cartVO.getQuantity());
+						cartVONew.setImageName(resultSet.getString("imagename"));
 						cartProductList.add(cartVONew);
 					}
 				} catch (SQLException e) {

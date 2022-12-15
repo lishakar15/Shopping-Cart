@@ -18,7 +18,7 @@ cartList= (List<CartVO>)request.getSession().getAttribute("cartList");
 
 %>
 <!DOCTYPE html>
-<html>
+<html>		
 <head>
 <%@ include file="/Includes/Header.jsp"%>
 <meta charset="ISO-8859-1">
@@ -45,7 +45,7 @@ cartList= (List<CartVO>)request.getSession().getAttribute("cartList");
 				<h6 class="category">Category: <%= productVO.getCategory() %></h6>
 				<div class="mt-3 d-flex justify-content-between">
 				<a href="add-to-cart?id=<%=productVO.getProductId()%>" class="btn btn-primary">Add to cart</a>
-				<a href="order-item?id=<%=productVO.getProductId() %>" class="btn btn-primary">Buy Now</a>
+				<a href="buy-now?id=<%=productVO.getProductId() %>" class="btn btn-primary">Buy Now</a>
 				</div>
 			</div>
 		</div>

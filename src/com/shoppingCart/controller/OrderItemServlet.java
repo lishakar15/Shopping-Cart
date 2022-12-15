@@ -2,6 +2,7 @@ package com.shoppingCart.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -47,6 +48,7 @@ public class OrderItemServlet extends HttpServlet {
 				}
 				if (isItemFound) {
 					SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+					DecimalFormat dcf = new DecimalFormat("#.##");
 					Date date = new Date();
 					String orderDate = sdf.format(date);
 					ordersVo = new OrdersVO();
@@ -55,6 +57,7 @@ public class OrderItemServlet extends HttpServlet {
 					ordersVo.setProductName(cartVO.getProductName());
 					ordersVo.setUserId(userVO.getId());
 					ordersVo.setOrderDate(orderDate);
+					//Need to add decimel formate
 					double totalAmt = cartVO.getPrice() * cartVO.getQuantity();
 					ordersVo.setTotalAmount(String.valueOf(totalAmt));
 				}

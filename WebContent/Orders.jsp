@@ -13,6 +13,10 @@ if(null != userVO)
 	OrdersDao ordersDao = new OrdersDao(DbConnection.getConnection());
 	ordersList = ordersDao.getOrderDetails(userVO.getId());
 }
+if(null == userVO)
+{
+	response.sendRedirect("Login.jsp");
+}
 %>
  
 <!DOCTYPE html>
